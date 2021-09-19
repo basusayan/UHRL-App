@@ -20,7 +20,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
-import { MatSidenavModule } from '@angular/material/sidenav';
+import {  MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
@@ -36,47 +36,78 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
 const materialModules = [
   CdkTreeModule,
-  MatAutocompleteModule,
-  MatButtonModule,
-  MatCardModule,
-  MatCheckboxModule,
-  MatChipsModule,
-  MatDividerModule,
-  MatExpansionModule,
-  MatIconModule,
-  MatInputModule,
-  MatListModule,
-  MatMenuModule,
-  MatProgressSpinnerModule,
-  MatPaginatorModule,
-  MatRippleModule,
-  MatSelectModule,
-  MatSidenavModule,
-  MatSnackBarModule,
-  MatSortModule,
-  MatTableModule,
-  MatTabsModule,
-  MatToolbarModule,
-  MatFormFieldModule,
-  MatButtonToggleModule,
-  MatTreeModule,
-  OverlayModule,
-  PortalModule,
-  MatBadgeModule,
-  MatGridListModule,
-  MatRadioModule,
-  MatDatepickerModule,
-  MatTooltipModule
-];
+MatAutocompleteModule,
+MatButtonModule,
+MatCardModule,
+MatCheckboxModule,
+MatChipsModule,
+MatDividerModule,
+MatExpansionModule,
+MatIconModule,
+MatInputModule,
+MatListModule,
+MatMenuModule,
+MatProgressSpinnerModule,
+MatPaginatorModule,
+MatRippleModule,
+MatSelectModule,
+MatSidenavModule,
+MatSnackBarModule,
+MatSortModule,
+MatTableModule,
+MatTabsModule,
+MatToolbarModule,
+MatFormFieldModule,
+MatButtonToggleModule,
+MatTreeModule,
+OverlayModule,
+PortalModule,
+MatBadgeModule,
+MatGridListModule,
+MatRadioModule,
+MatDatepickerModule,
+MatCardModule,
+MatCheckboxModule,
+MatChipsModule,
+MatDividerModule,
+MatExpansionModule,
+MatIconModule,
+MatInputModule,
+MatListModule,
+MatMenuModule,
+MatProgressSpinnerModule,
+MatPaginatorModule,
+MatRippleModule,
+MatSelectModule,
+MatSidenavModule,
+MatSnackBarModule,
+MatSortModule,
+MatTableModule,
+MatTabsModule,
+MatToolbarModule,
+MatFormFieldModule,
+MatButtonToggleModule,
+MatTreeModule,
+OverlayModule,
+PortalModule,
+MatBadgeModule,
+MatGridListModule,
+MatRadioModule,
+MatDatepickerModule,
+
+
+]
+
 
 @NgModule({
-  imports: [
-    CommonModule,
-    ...materialModules
-  ],
-  exports: [
-    ...materialModules
-  ],
+  exports: [...materialModules],
+  imports : [CommonModule, ...materialModules]
 })
 
-export class AngularMaterialModule { }
+
+export class AngularMaterialModule {}
+
+
+/**  Copyright 2021 Google LLC. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at http://angular.io/license */

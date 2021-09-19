@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row">
+    <div class="col-3 border-right scrollOverflow">
+      <h3>Employee Lists</h3>
+      <div *ngIf="isLoadingSpinner;else spinner">
+      <mat-list *ngFor="let emp of employee;let indexofEmployee=index" class="point">
+        <mat-list-item routerLink="salarycalculate" (click)="fetchSalary(indexofEmployee)">{{emp.name}}</mat-list-item>
+        <mat-divider></mat-divider>
+      </mat-list>
+    </div>
+    <ng-template #spinner>
+      
+      <img style="width:20px;"  src="../assets/Fading line.gif">
+    </ng-template>
+    </div>
+    <div class="col-9">
+      <p style="font-weight:bold;font-size: 16px;">Calculating Salary/ Advance Salary?</p>
+      <mat-radio-group style="font-size : 18px">
+        <mat-radio-button value="1" (click)="isSalary(1)">Salary</mat-radio-button>&nbsp;
+        <mat-radio-button value="2" (click)="isSalary(2)">Advance Salary</mat-radio-button>
+      </mat-radio-group>
+      <hr />
+      <div *ngIf="isSalaryRadio; else advanceBlock">
+        <app-salarycalculate></app-salarycalculate>
+      </div>
+      <ng-template #advanceBlock>
+        <app-advance></app-advance>
+      </ng-template>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,143 @@
+<div class="container">
+  <div *ngIf="!firstInit;else elseBlock">
+    Calculate the Salary here
+
+  </div>
+  <ng-template #elseBlock>
+    <div *ngIf="salarySubmitted" class="alert alert-success" role="alert">
+      Salary calculated successfully
+    </div>
+
+    <form [formGroup]="attendenceForm" (ngSubmit)="onSubmit(attendenceForm)">
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+
+            <label for="exampleFormControlSelect1">Select Salary Month*</label>
+
+            <select class="form-control" id="exampleFormControlSelect1" formControlName="month">
+              <option value="">Select an option</option>
+              <option [value]="previousCompleteString">{{previousCompleteString}}</option>
+              <option [value]= "currentDateCompleteString">{{currentDateCompleteString}}</option>
+
+            </select>
+                <div *ngIf="attendenceForm.controls['month'].invalid && (attendenceForm.controls['month'].dirty || attendenceForm.controls['month'].touched)"
+                  class="alert alert-danger">
+
+                  <div *ngIf="attendenceForm.controls['month'].errors?.required">
+                    Month is required.
+                  </div>
+                </div>
+
+          </div>
+        </div>
+        <div class="col">
+          <label for="totalWorkingDays">Working Days*</label>
+          <input type="text" class="form-control" placeholder="Total working days" id="totalWorkingDays"
+            formControlName="workingDay" required>
+          <div
+            *ngIf="attendenceForm.controls['workingDay'].invalid && (attendenceForm.controls['workingDay'].dirty || attendenceForm.controls['workingDay'].touched)"
+            class="alert alert-danger">
+
+            <div *ngIf="attendenceForm.controls['workingDay'].errors?.required">
+              Total Working days is required.
+            </div>
+            <div *ngIf="attendenceForm.controls['workingDay'].errors?.pattern">
+              Enter only number.
+            </div>
+            <div *ngIf="attendenceForm.controls['workingDay'].errors?.rangeValidator">
+              Accepted value range: 0-31
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        &nbsp;
+      </div>
+      <br />
+      <div class="row">
+        <div class="col">
+          <label for="employeeName">Employee Name</label>
+          <input type="text" class="form-control" id="employeeName" [value]="name" readonly>
+        </div>
+        <div class="col">
+          <label for="employeeSalary">Employee Salary</label>
+          <input type="text" class="form-control" id="employeeSalary" [value]="salary" readonly>
+        </div>
+      </div>
+      <div class="row">
+        &nbsp;
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-3">
+          <label for="employeePresent">Attend*</label>
+          <input type="text" class="form-control" id="employeePresent" formControlName="attendence">
+          <div
+            *ngIf="attendenceForm.controls['attendence'].invalid && (attendenceForm.controls['attendence'].dirty || attendenceForm.controls['attendence'].touched)"
+            class="alert alert-danger">
+
+            <div *ngIf="attendenceForm.controls['attendence'].errors?.required">
+              Attendence is required.
+            </div>
+            <div *ngIf="attendenceForm.controls['attendence'].errors?.pattern">
+              Enter only number.
+            </div>
+            <div *ngIf="attendenceForm.controls['attendence'].errors?.rangeValidator">
+              Accepted value range: 0-31
+            </div>
+
+          </div>
+        </div>
+        <div class="col-3">
+          <label for="employeeAdvance">Advance*</label>
+          <div *ngIf="isAdvanceLoaded;else notLoaded">
+          <input type="text" class="form-control" id="employeeAdvance" formControlName="advance">
+          </div>
+          <ng-template #notLoaded>
+            <input type="text" class="form-control" id="employeeAdvance" value="Loading...">
+          </ng-template>
+          <div
+            *ngIf="attendenceForm.controls['advance'].invalid && (attendenceForm.controls['advance'].dirty || attendenceForm.controls['advance'].touched)"
+            class="alert alert-danger">
+
+            <div *ngIf="attendenceForm.controls['advance'].errors?.required">
+              Advance is required.
+            </div>
+            <div *ngIf="attendenceForm.controls['advance'].errors?.pattern">
+              Enter only number.
+            </div>
+            
+          </div>
+        </div>
+        <div class="col-3">
+
+        </div>
+        <div class="col-3 salaryPayable">
+          <label for="salaryPayable">Net Payable Salary</label><br /><br />
+          <span id="salaryPayable">Salary</span>
+        </div>
+
+
+      </div>
+      <div class="row">
+        &nbsp;
+      </div>
+      <br />
+
+      <div class="row">
+        <div class="col-3">
+          <button type="submit" class="btn btn-primary" id="calculateSalary"
+            [disabled]="!attendenceForm.valid">Calculate Salary</button>
+
+        </div>
+
+
+
+      </div>
+    </form>
+
+
+  </ng-template>
+</div>

@@ -5,14 +5,14 @@
         <mat-card-title>Sign In</mat-card-title>
       </mat-card-header>
   
-      <form class="example-form">
+      <form class="example-form" #loginForm="ngForm" (ngSubmit)="login(loginForm)">
         <table>
           
         <mat-card-content>
           <tr>
           <mat-form-field appearance="fill">
           <mat-label>Enter Username</mat-label>
-            <input matInput placeholder="Username">  
+            <input matInput placeholder="Username" name="username" id="username" [(ngModel)]="model.username" #username="ngModel">  
             <span matSuffix>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>          
           </mat-form-field>
           
@@ -20,7 +20,7 @@
         <tr>
           <mat-form-field appearance="fill">
             <mat-label>Enter your password</mat-label>
-            <input matInput [type]="hide ? 'password' : 'text'" placeholder="Password">
+            <input matInput [type]="hide ? 'password' : 'text'" placeholder="Password" id="password" name="password" [(ngModel)]="model.password" #password="ngModel">
             <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
               <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
@@ -28,6 +28,7 @@
         </tr>
         </mat-card-content>
         <button mat-raised-button color="primary" class="btn-block">Sign-in</button>
+        <mat-error *ngIf="showError">Wrong credentials</mat-error>
 
       </table>
       </form>
