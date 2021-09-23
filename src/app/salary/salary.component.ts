@@ -20,6 +20,8 @@ export class SalaryComponent implements OnInit {
   constructor(private salaryService: SalaryService) { }
   employee:Employee[] =[]
   isLoadingSpinner = false
+  empTest!:Employee[];
+  
   getAllEmployee(){
   this.salaryService.getEmployeeList().subscribe(emp =>{
     this.employee = emp
@@ -27,6 +29,10 @@ export class SalaryComponent implements OnInit {
   })
   
   }
+  //getTest(){
+   // this.empTest = this.salaryService.getEmpAPI()
+  //  console.log(typeof this.empTest)
+  //}
   fetchSalary(salIndex: number) {
     
     this.sal = this.employee[salIndex].salary
@@ -61,6 +67,7 @@ export class SalaryComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllEmployee()
+    //this.getTest()
 
   }
 

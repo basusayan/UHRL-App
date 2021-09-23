@@ -19,6 +19,7 @@ export class AdvanceComponent implements OnInit {
   firstInit: boolean = false;
   advanceForm!: FormGroup;
   lastID:number= 0;
+  lastIDAPI:any;
   lastIDOb!:number;
   currentDateCompleteString: any;
   
@@ -30,6 +31,7 @@ export class AdvanceComponent implements OnInit {
   advanceSubmitted = false;
   isAdvanceLoaded:boolean = false;
   employeeWiseAdvanceAPI!:Observable<EmployeeAdvance[]>;
+  //empTest!:Employee[];
   constructor(private salaryService: SalaryService) {
 
   }
@@ -114,36 +116,19 @@ export class AdvanceComponent implements OnInit {
 
   onSubmit(form: FormGroup) {
     this.lastID = +this.name.split(' ')[1]
-    /*this.salaryService.getId(this.name).subscribe(val=>{
-      console.log(val)
-      this.lastID =val
-    })*/
-    this.employeeAdvance1 = {
-      id: this.lastID,
-      name: this.name,
-      advance: form.value.advance,
-      month: form.value.month
-    }
-    //this.employeeWiseAdvance = this.salaryService.getEmployeeWiseAdvance()
-    //console.log(this.employeeAdvance1)+-+ 
-    /*
-  if(this.employeeWiseAdvance.length!=0){
-   let checkVal =this.employeeWiseAdvance.filter(val => val.name ===this.employeeAdvance1.name);
-   
-   if(checkVal.length >0){
-    this.salaryService.updateAdvance(checkVal[0].name,this.employeeAdvance1.advance)
-   }
-   else{
-    this.salaryService.advanceCalculate(this.employeeAdvance1)
-    this.createAdvanceRecordTS(this.employeeAdvance1)
-   }
-  }
-  else{
     
-    this.salaryService.advanceCalculate(this.employeeAdvance1)
-    this.createAdvanceRecordTS(this.employeeAdvance1)
-  }
-  */
+    this.salaryService.getId(this.name).subscribe((val:any)=>{
+      this.lastIDAPI=val 
+      console.log(this.lastIDAPI)
+      this.employeeAdvance1 = {
+        id: this.lastIDAPI,
+        name: this.name,
+        advance: form.value.advance,
+        month: form.value.month
+      }
+    })
+    
+ 
   this.employeeWiseAdvanceAPI.subscribe(value =>
     {
       if(value.length!=0){

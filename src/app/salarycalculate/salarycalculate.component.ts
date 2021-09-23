@@ -31,7 +31,8 @@ export class SalarycalculateComponent implements OnInit {
   employeeWiseAdvanceAPI!:Observable<EmployeeAdvance[]>
   salarySubmitted:boolean = false
   lastId:number = 0;
-
+  lastIdAPI:any;
+  advances!:EmployeeAdvance;
   constructor(private salaryService:SalaryService) { 
   
     
@@ -127,20 +128,27 @@ export class SalarycalculateComponent implements OnInit {
       console.log('Working Day', form.value.workingDay);
       console.log('Attendence', form.value.attendence);
       //this.salaryService.updateAdvance(this.name,form.value.advance)
-      this.lastId= +this.name.split(' ')[1]
+      //this.lastId= +this.name.split(' ')[1]
       /*this.salaryService.getId(this.name).subscribe(val=>{
         console.log(val)
         this.lastId =val
       })*/
-      let advances:EmployeeAdvance ={
-        id: this.lastId,
-        name: this.name,
-        month:form.value.month,
-        advance: form.value.advance
-
-      }
-      console.log(advances)
-      this.salaryService.updateAdvanceAPI(advances).subscribe(advances => this.salaryService.getAdvanceRecord())
+      this.salaryService.getId(this.name).subscribe((val:any)=>{
+        this.lastIdAPI=val
+        console.log(this.lastIdAPI)
+        this.advances ={
+          id: this.lastIdAPI,
+          name: this.name,
+          month:form.value.month,
+          advance: form.value.advance
+  
+        }
+        
+      this.salaryService.updateAdvanceAPI(this.advances).subscribe(advances => this.salaryService.getAdvanceRecord())
       this.salarySubmitted = true
+      })
+      
+      
+      
     }
 }

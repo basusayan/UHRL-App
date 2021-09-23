@@ -22,10 +22,11 @@ export class SalaryService {
   previousCompleteString: any;
   previousMonthIndex: any;
   allEmployees!:Observable<Employee[]>;
+  empTest!:Employee[];
   monthArray = ["January", "February", "March", "April", "May", "June","July", 
   "August", "September", "October", "November", "December"
 ]
-  lastId:number = 0
+  lastId:any;
   employeeUrl = "/api/employeeList"
   advanceUrl = "/api/advances"
 
@@ -129,33 +130,32 @@ export class SalaryService {
 
   }
 
-  getId(name:string):Observable<number>{
-    /*let lastIdTest;
-    this.allEmployees.subscribe(
-      value=>{
-        let checkId =value.filter(val => val.name ===name);
-        this.lastId = checkId[0].id
-        console.log('Inside sub',this.lastId)
-        lastIdTest = checkId[0].id
-        return this.lastId
-      }
-    )*/
-    return this.allEmployees.pipe(map(val =>{
-      let checkId =val.filter(val => val.name ===name);
-        this.lastId = checkId[0].id
-        
-        //lastIdTest = checkId[0].id
-        return this.lastId
-    }
-
-    )
-
-    )
+  getId(name:string):any{
     
+    this.allEmployees = this.getEmployeeList()
+    return this.allEmployees.pipe(map((value=>{
+      this.lastId = value.filter(val => val.name ===name)[0].id
+      //console.log(this.lastId , 'Hee')
+      return this.lastId
+    })
+    ))
+    
+   
+   
   }
 
-
-  constructor(private http:HttpClient) { 
+  getEmpAPI():Employee[]{
+    this.allEmployees.subscribe((emp:Employee[])=>{
+      this.empTest = emp
+    })
+    return this.empTest
+  }
+  ngOnInit(){
     this.allEmployees = this.getEmployeeList()
+  }
+
+  constructor(private http:HttpClient) {
+    console.log('Service constructor') 
+    
   }
 }
